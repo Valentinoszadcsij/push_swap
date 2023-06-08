@@ -6,7 +6,7 @@
 /*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 11:07:30 by voszadcs          #+#    #+#             */
-/*   Updated: 2023/05/03 11:33:33 by voszadcs         ###   ########.fr       */
+/*   Updated: 2023/06/04 18:55:43 by voszadcs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,50 @@ void	check_dup(int *stack, int len)
 			i++;
 		}
 	}
+}
+
+void	init_t_calc(t_calc *calc)
+{
+	calc->rot_a = INT_MAX;
+	calc->rot_b = 0;
+	calc->r_rot_a = INT_MAX;
+	calc->r_rot_b = 0;
+	calc->best_cur = 0;
+	calc->cur = 0;
+	calc->iter_cur = 0;
+	calc->iter_prev = INT_MAX;
+}
+
+int	find_min(t_stack *s)
+{
+	int	i;
+	int	index;
+
+	i = 0;
+	index = 0;
+	while (i < s->length_a - 1)
+	{
+		if (s->stack_a[i] >= s->stack_a[i + 1]
+			&& s->stack_a[index] >= s->stack_a[i + 1])
+			index = i + 1;
+		i++;
+	}
+	return (s->stack_a[index]);
+}
+
+int	find_max(t_stack *s)
+{
+	int	i;
+	int	index;
+
+	i = 0;
+	index = 0;
+	while (i < s->length_a - 1)
+	{
+		if (s->stack_a[i] <= s->stack_a[i + 1]
+			&& s->stack_a[index] <= s->stack_a[i + 1])
+			index = i + 1;
+		i++;
+	}
+	return (s->stack_a[index]);
 }
